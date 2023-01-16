@@ -32,15 +32,15 @@ def get_data(name: str) -> list:
             driver.get(url)
             time.sleep(wait_loading)
 
-            # Object NAME 테이블 선택
+            # 판테온 NAME 테이블 선택
             tr_list = driver.find_elements(
-                By.XPATH, '//*[@id="Skilltreeascendancy_listid0"]/div/table/tbody/tr')
+                By.XPATH, '//*[@id="Itemjson_item_classcnHeistEquipmentTool"]/div/table/tbody/tr')
             for tr in tr_list:
                 td_list = tr.find_elements(By.TAG_NAME, 'td')
-                a_tag = td_list[0].find_element(By.TAG_NAME, 'a')
+                a_tag = td_list[1].find_element(By.TAG_NAME, 'a')
                 if a_tag.text:
                     df.loc[len(df)] = [a_tag.text]
-    
+        
         # df 저장
         data_control.save_df(name, df)
             
