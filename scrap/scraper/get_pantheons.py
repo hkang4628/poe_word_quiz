@@ -1,17 +1,18 @@
 import data_control
 import os
 import time
+import pandas as pd
 
 from selenium import webdriver  # 웹 브라우저 컨트롤을 위한 프레임 워크
 from selenium.webdriver.common.by import By  # selenium 4.0 이상에서 사용
 
 
 def get_data(name: str) -> list:
-    pantheon = []
+    df = pd.DataFrame(columns = ['name'])
 
-    if os.path.isfile(f'scrap/scraped_list/{name}.p'):
+    if os.path.isfile(f'scrap/scraped_data/{name}.p'):
         # {name} pickle 파일이 있을 시 pickle load
-        pantheon = data_control.load_list(name)
+        df = data_control.load_df(name)
         
     else:
         # {name} pickle 파일이 없으면 크롤링
@@ -36,9 +37,13 @@ def get_data(name: str) -> list:
                 By.XPATH, '//*[@id="Pantheonlists"]/div/table/tbody/tr')
             for tr in tr_list:
                 td_list = tr.find_elements(By.TAG_NAME, 'td')
-                pantheon.append(td_list[1].text)
+                if td_list[1].text:
+                    df.loc[len(df)] = [td_list[1].text]
+        
+        # df 저장
+        data_control.save_df(name, df)
             
-    return pantheon
+    return df
 
 
 

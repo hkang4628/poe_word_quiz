@@ -3,13 +3,30 @@ from scraper import get_classes
 from scraper import get_objects
 from scraper import get_pantheons
 from scraper import get_passives
-import word_to_first_consonant_letter
+
 import data_control
-import os
+
 
 if __name__ == '__main__':
 
     # 판테온 데이터 스크랩
     name = "pantheons"
-    pantheons = get_pantheons.get_data(name)
-    print(pantheons)
+    df = get_pantheons.get_data(name)
+    print(df)
+
+    # 초성 Column 추가
+    df['first_letter'] = df.apply(data_control.add_first_letter, axis=1)
+    print(df)
+
+    # DB에 저장
+    # ==================================
+    # 판테온 데이터 스크랩
+    name = "objects"
+    df = get_objects.get_data(name)
+    print(df)
+
+    # 초성 Column 추가
+    df['first_letter'] = df.apply(data_control.add_first_letter, axis=1)
+    print(df.tail(15))
+
+    # DB에 저장

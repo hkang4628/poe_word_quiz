@@ -42,5 +42,25 @@
 # for c in range(calc_list):
 #     print(f'{c}: {eval(x+c+y)}')
 
-s = "10a10"
-print(s.isalnum())
+# 문제 1
+import random
+
+
+def quiz1():
+    n1, n2 = [random.randrange(10, 100) for _ in range(2)]
+    print(n1, n2)
+    print(n1*n2 if (n1+n2) % 2 else n1+n2)
+
+
+def quiz2():
+    n1, n2 = [random.randrange(10, 100) for _ in range(2)]
+    print(n1, n2)
+    result = int(input("합: "))
+    if n1+n2 == result:
+        print("정답")
+    else:
+        print("오답")
+
+
+quiz1()
+quiz2()

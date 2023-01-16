@@ -1,1 +1,5 @@
+# ignore pickle file for save scraped data
 *.p
+
+# ignore jupyter_notebook for test
+*.ipynb
