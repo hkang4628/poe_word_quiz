@@ -43,3 +43,15 @@ if __name__ == '__main__':
     print(df.tail(15))
 
     # DB에 저장
+    # ==================================
+    # 패시브 데이터 스크랩
+    name = "passives"
+    df = get_passives.get_data(name)
+    print(df)
+
+    # 초성 Column 추가
+    df['first_letter'] = df.apply(data_control.add_first_letter, axis=1)
+    print(df.head(15))
+    print(df.tail(15))
+
+    # DB에 저장
