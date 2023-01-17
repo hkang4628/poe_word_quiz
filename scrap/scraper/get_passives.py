@@ -40,7 +40,7 @@ def get_data(name: str) -> list:
                 a_tag = td_list[0].find_element(By.TAG_NAME, 'a')
                 if a_tag.text:
                     df.loc[len(df)] = [a_tag.text]
-    
+                
         # df 저장
         data_control.save_df(name, df)
             

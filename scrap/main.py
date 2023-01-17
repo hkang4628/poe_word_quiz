@@ -70,3 +70,29 @@ if __name__ == '__main__':
     print(df.tail(15))
 
     # DB에 저장
+
+    # ==================================
+    # 커런시 데이터 스크랩
+    name = "currency"
+    df = get_currency.get_data(name)
+    print(df)
+
+    # 초성 Column 추가
+    df['first_letter'] = df.apply(data_control.add_first_letter, axis=1)
+    print(df.head(15))
+    print(df.tail(15))
+
+    # DB에 저장
+
+    # ==================================
+    # 젬 데이터 스크랩
+    name = "gems"
+    df = get_gems.get_data(name)
+    print(df)
+
+    # 초성 Column 추가
+    df['first_letter'] = df.apply(data_control.add_first_letter, axis=1)
+    print(df.head(15))
+    print(df.tail(15))
+
+    # DB에 저장
